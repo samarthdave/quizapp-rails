@@ -1,0 +1,42 @@
+<%= form_for(@quiz, html: {class: 'well'}) do |f| %>
+	<% if @quiz.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+			<ul>
+			<% @quiz.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+	<div class="form-group">
+		<%= f.label :title, class: 'sr-only' %><br>
+		<%= f.text_field :title, class: 'form-control', placeholder: 'Title' %>
+	</div>
+	<% @count = 0 %>
+	<%= f.nested_fields_for :questions do |ff| %>
+		<% @count+=1 %>
+		<div class="form-group">
+			<div class="input-group">
+				<% if @count == 1 || @count == 2 %>
+					<%= ff.text_field :content, class: 'form-control', placeholder: "Question #{@count}" %>
+					<span class="input-group-addon btn btn-danger disabled">
+						<span class="fa fa-trash" aria-hidden="true"></span>
+					</span>
+				<% else %>
+					<%= ff.text_field :content, class: 'form-control', placeholder: "Question __nested_field_for_replace_with_index__" %>
+					<%= ff.remove_nested_fields_link 'Delete', class: 'btn btn-danger input-group-addon', role: 'button' do %>
+						<span class="fa fa-trash" aria-hidden="true"></span>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+	<div class="form-group">
+		<%= f.add_nested_fields_link :questions, 'Add question', class: 'btn btn-success pull-right', role: 'button' %>
+	</div>
+	<div class="form-group">
+		<%= f.submit class: 'btn btn-primary' %>
+	</div>
+<% end %>
