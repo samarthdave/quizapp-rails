@@ -215,7 +215,6 @@ a.pull-left {
 }
 .jumbotron h1 {
 	font-size: 6em;
-	font-family: 'Lato';
 }
 /*3 color blocks*/
 .block-list h1 {
@@ -280,4 +279,14 @@ a.pull-left {
 h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 	color: white;
+}
+// block items
+.b-1 {
+	background-color: #9b59b6;
+}
+.b-2 {
+	background-color: #27ae60;
+}
+.b-3 {
+	background-color: #16a085;
 }
